@@ -29,6 +29,4 @@ public class NewsClient {
 		
 		return restTemplate.getForObject(url, TopHeadlineDto.class);
 	}
-	
-	
 }

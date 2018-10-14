@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ArticleDto {
-	private SmallSourceDto source;
+	private SourceDto source;
 	private String author;
 	private String title;
 	private String description;
