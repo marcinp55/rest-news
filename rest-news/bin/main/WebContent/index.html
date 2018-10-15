@@ -13,14 +13,37 @@
 			<p id="category_p">Category</p>
 		</div>
 		
-		<div>
-			<h1 id="article_title">Title</h1>
-			<img id="article_img" src="">
-			<p id="article_desc">Description</p>
-			<p id="article_auth">Author</p>
-			<p>Go to article: <a id="article_link" href="">Link</a></p>
-			<p id="article_date">Date</p>
-			<p id="article_src">Source</p>
+		<section class="datatable">
+			<div data-articles-container></div>
+		</section>
+		
+		<div class="template" data-article-template>
+			<div data-article-id="">
+				<h1 data-article-title>Title</h1>
+				<img src="" data-article-img>
+				<table>
+					<tr>
+						<td>Description:</td>
+						<td data-article-desc>desc</td>
+					</tr>
+					<tr>
+						<td>Author:</td>
+						<td data-article-auth>auth</td>
+					</tr>
+					<tr>
+						<td>Go to article:</td>
+						<td><a href="" data-article-link>Link</a></td>
+					</tr>
+					<tr>
+						<td>Date:</td>
+						<td data-article-date>date</td>
+					</tr>
+					<tr>
+						<td>Source:</td>
+						<td data-article-src>src</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<button id="my_custom_button">Click</button>
 	</body>
