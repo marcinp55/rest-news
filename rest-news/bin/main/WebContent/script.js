@@ -48,7 +48,7 @@ $(document).ready(function() {
 				}
 				
 				if(this.publishedAt != null) {
-					element.find('[data-article-date]').html(this.publishedAt);	
+					element.find('[data-article-date]').html((this.publishedAt).substring(0, 10));	
 				} else {
 					element.find('[data-article-date]').html("No article date provided.");
 				}

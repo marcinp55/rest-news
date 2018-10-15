@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+//apply plugin: 'war'
 
 group = 'com.rest.news'
 version = '0.0.1-SNAPSHOT'
@@ -36,7 +36,10 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
 	
+	compile('io.springfox:springfox-swagger2:2.7.0')
+	compile('io.springfox:springfox-swagger-ui:2.7.0')
+	
 	compileOnly('org.projectlombok:lombok:1.18.2')
 	
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	//providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
