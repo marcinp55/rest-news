@@ -8,7 +8,29 @@
 		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 	</head>
 	<body>
-	<button id="show_articles_button">Click</button>
+		<h1 id="initial_header">Choose country and category to display news.</h1>
+		<div data-articles-filter>
+			<label for="country_select">Country</label>
+			<select id="country_select">
+				<option value="pl" selected="selected">Poland</option>
+				<option value="us">United States</option>
+				<option value="de">Germany</option>
+				<option value="gb">Great Britain</option>
+				<option value="au">Australia</option>
+				<option value="fr">France</option>
+			</select>
+			<label for="category_select">Category</label>
+			<select id="category_select">
+				<option value="technology" selected="selected">Technology</option>
+				<option value="business">Business</option>
+				<option value="sports">Sport</option>
+				<option value="entertainment">Entertainment</option>
+				<option value="science">Science</option>
+				<option value="health">Health</option>
+			</select>
+			<button id="show_articles_button">Show news</button>
+		</div>
+		<hr>
 		<div data-articles-info>
 			<table>
 				<tr>
@@ -21,6 +43,7 @@
 				</tr>
 			</table>
 		</div>
+		<hr>
 		<section class="datatable">
 			<div data-articles-container></div>
 		</section>

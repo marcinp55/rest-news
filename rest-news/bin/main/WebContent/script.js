@@ -1,10 +1,14 @@
 $(document).ready(function() {
 	var datatableRowTemplate = $('[data-article-template]').children()[0];
 	var articlesContainer = $('[data-articles-container]');
+	var apiRoot = 'http://localhost:8080/news/';
 	
 	$('#show_articles_button').click(function() {
+		var selectedCountry = $('#country_select').val();
+		var selectedCategory = $('#category_select').val();
+		
 		$.ajax({
-			url: "http://localhost:8080/news/pl/technology"
+			url: apiRoot + selectedCountry + '/' + selectedCategory
 		}).then(function(data) {
 			articlesContainer.empty();
 			$('[data-articles-country]').html(data.country);

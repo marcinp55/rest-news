@@ -10,6 +10,17 @@
 	display: none !important;
 }
 
+#initial_header {
+	font-family: 'Oswald', sans-serif;
+	font-size: 25px;
+}
+
+[data-articles-filter], [data-articles-info] {
+	font-family: 'Slabo 27px', serif;
+	font-size: 18px;
+	color: #5E5E5E;
+}
+
 [data-article-title] {
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
