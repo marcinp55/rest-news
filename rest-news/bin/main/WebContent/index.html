@@ -4,48 +4,55 @@
 		<meta charset="UTF-8">
 		<title>REST News</title>
 		<link rel="stylesheet" type="text/css" href="view.css">
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 	</head>
 	<body>
-		<div class="coun_cat_div">
-			<label for="country_p">Displaying country:</label>
-			<p id="country_p">Country</p><br>
-			<label for="category_p">Displaying category:</label>
-			<p id="category_p">Category</p>
+	<button id="show_articles_button">Click</button>
+		<div data-articles-info>
+			<table>
+				<tr>
+					<td>Displaying country:</td>
+					<td data-articles-country></td>
+				</tr>
+				<tr>
+					<td>Displaying category:</td>
+					<td data-articles-category></td>
+				</tr>
+			</table>
 		</div>
-		
 		<section class="datatable">
 			<div data-articles-container></div>
 		</section>
-		
 		<div class="template" data-article-template>
-			<div data-article-id="">
+			<div>
 				<h1 data-article-title>Title</h1>
 				<img src="" data-article-img>
 				<table>
-					<tr>
+					<tr data-desc-row>
 						<td>Description:</td>
 						<td data-article-desc>desc</td>
 					</tr>
-					<tr>
+					<tr data-auth-row>
 						<td>Author:</td>
 						<td data-article-auth>auth</td>
 					</tr>
-					<tr>
+					<tr data-link-row>
 						<td>Go to article:</td>
 						<td><a href="" data-article-link>Link</a></td>
 					</tr>
-					<tr>
+					<tr data-date-row>
 						<td>Date:</td>
 						<td data-article-date>date</td>
 					</tr>
-					<tr>
+					<tr data-src-row>
 						<td>Source:</td>
 						<td data-article-src>src</td>
 					</tr>
 				</table>
+				<hr>
 			</div>
 		</div>
-		<button id="my_custom_button">Click</button>
 	</body>
 	<script src="jquery-3.3.1.min.js"></script>
 	<script src="script.js"></script> 

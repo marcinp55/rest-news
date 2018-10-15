@@ -5,3 +5,23 @@
 #category_p {
 	display: inline;
 }
+
+.template {
+	display: none !important;
+}
+
+[data-article-title] {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+}
+
+[data-desc-row], [data-auth-row], [data-link-row], [data-date-row], [data-src-row] {
+	font-family: 'Slabo 27px', serif;
+	font-size: 20px;
+	color: #5E5E5E;
+}
+
+[data-article-img] {
+	height: 30vh;
+	width: 30vw;
+}
