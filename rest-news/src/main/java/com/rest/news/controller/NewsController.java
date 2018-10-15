@@ -18,7 +18,7 @@ public class NewsController {
 	NewsClient newsClient;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "{country}/{category}")
-	public HeadlineAndSourceDto getTopHeadlines(@PathVariable String country, @PathVariable String category) {
+	public HeadlineAndSourceDto getTopHeadlines(@PathVariable("country") String country, @PathVariable("category") String category) {
 		return new HeadlineAndSourceDto(country, category, newsClient.getTopHeadlinesFromApi(country, category));
 	}
 }
