@@ -1,6 +1,7 @@
 package com.rest.news.controller;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,6 +35,21 @@ public class NewsControllerTestSuite {
 	private NewsController newsController;
 	
 	@Test
+	public void shouldFetchEmptyArticleList() throws Exception {
+		//Given
+		HeadlineAndSourceDto headlineAndSourceDto = new HeadlineAndSourceDto("Wrong country", "Wrong category", new TopHeadlineDto(new ArrayList<>()));
+		
+		when(newsController.getTopHeadlines(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(headlineAndSourceDto);
+		
+		//When&Then
+		mockMvc.perform(get("/news/{country}/{category}", "wrongCountry", "wrongCategory").contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.country", is("Wrong country")))
+			.andExpect(jsonPath("$.category", is("Wrong category")))
+			.andExpect(jsonPath("$.topHeadlineDto.articles", hasSize(0)));
+	}
+	
+	@Test
 	public void shouldFetchHeadlinesAndSources() throws Exception {
 		//Given
 		SourceDto sourceDto = new SourceDto("Test source");
@@ -50,7 +66,7 @@ public class NewsControllerTestSuite {
 		//When&Then
 		String mockArticlePath = "$.topHeadlineDto.articles[0]";
 		
-		mockMvc.perform(get("/news/{country}/{category}", "anyCountry", "anyTechnology").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/news/{country}/{category}", "existingCountry", "existingCategory").contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.country", is("Test country")))
 			.andExpect(jsonPath("$.category", is("Test technology")))
