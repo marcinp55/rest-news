@@ -34,8 +34,10 @@ public class NewsControllerTestSuite {
 	@MockBean
 	private NewsController newsController;
 	
+	private String mockArticlePath = "$.topHeadlineDto.articles[0]";
+	
 	@Test
-	public void shouldFetchEmptyArticleList() throws Exception {
+	public void shouldFetchEmptyArticleListWCountryCategory() throws Exception {
 		//Given
 		HeadlineAndSourceDto headlineAndSourceDto = new HeadlineAndSourceDto("Wrong country", "Wrong category", new TopHeadlineDto(new ArrayList<>()));
 		
@@ -50,7 +52,7 @@ public class NewsControllerTestSuite {
 	}
 	
 	@Test
-	public void shouldFetchHeadlinesAndSources() throws Exception {
+	public void shouldFetchHeadlinesAndSourcesWCountryCategory() throws Exception {
 		//Given
 		SourceDto sourceDto = new SourceDto("Test source");
 		ArticleDto articleDto = new ArticleDto(sourceDto, "Test author", "Test title", "Test description", "Test URL", "Test URL to image", "Test date");
@@ -64,8 +66,6 @@ public class NewsControllerTestSuite {
 		when(newsController.getTopHeadlines(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(headlineAndSourceDto);
 		
 		//When&Then
-		String mockArticlePath = "$.topHeadlineDto.articles[0]";
-		
 		mockMvc.perform(get("/news/{country}/{category}", "existingCountry", "existingCategory").contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.country", is("Test country")))
@@ -77,5 +77,48 @@ public class NewsControllerTestSuite {
 			.andExpect(jsonPath(mockArticlePath + ".url", is("Test URL")))
 			.andExpect(jsonPath(mockArticlePath + ".urlToImage", is("Test URL to image")))
 			.andExpect(jsonPath(mockArticlePath + ".publishedAt", is("Test date")));
+	}
+	
+	@Test
+	public void shouldFetchEmptySearchedArticleList() throws Exception {
+		//Given
+		HeadlineAndSourceDto headlineAndSourceDto = new HeadlineAndSourceDto(new TopHeadlineDto(new ArrayList<>()));
+		
+		when(newsController.getTopHeadlinesByQuery(ArgumentMatchers.anyString())).thenReturn(headlineAndSourceDto);
+		
+		//When&Then
+		mockMvc.perform(get("/news/search")
+				.contentType(MediaType.APPLICATION_JSON)
+				.param("query", "test"))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath("$.topHeadlineDto.articles", hasSize(0)));
+	}
+	
+	@Test
+	public void shouldFetchSearchedHeadlinesAndSources() throws Exception {
+		//Given
+		SourceDto sourceDto = new SourceDto("Search source");
+		ArticleDto articleDto = new ArticleDto(sourceDto, "Search author", "Search title", "Search description", "Search URL", "Search URL to image", "Search date");
+		
+		List<ArticleDto> articles = new ArrayList<>();
+		articles.add(articleDto);
+		
+		TopHeadlineDto topHeadlineDto = new TopHeadlineDto(articles);
+		HeadlineAndSourceDto headlineAndSourceDto = new HeadlineAndSourceDto(topHeadlineDto);
+		
+		when(newsController.getTopHeadlinesByQuery(ArgumentMatchers.anyString())).thenReturn(headlineAndSourceDto);
+		
+		//When&Then
+		mockMvc.perform(get("/news/search")
+				.contentType(MediaType.APPLICATION_JSON)
+				.param("query", "test"))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath(mockArticlePath + ".source.name", is("Search source")))
+					.andExpect(jsonPath(mockArticlePath + ".author", is("Search author")))
+					.andExpect(jsonPath(mockArticlePath + ".title", is("Search title")))
+					.andExpect(jsonPath(mockArticlePath + ".description", is("Search description")))
+					.andExpect(jsonPath(mockArticlePath + ".url", is("Search URL")))
+					.andExpect(jsonPath(mockArticlePath + ".urlToImage", is("Search URL to image")))
+					.andExpect(jsonPath(mockArticlePath + ".publishedAt", is("Search date")));
 	}
 }
