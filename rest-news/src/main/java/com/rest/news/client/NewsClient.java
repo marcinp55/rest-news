@@ -21,6 +21,14 @@ public class NewsClient {
 	@Value("${news.api.key}")
 	private String newsApiKey;
 	
+	public TopHeadlineDto querySearchTopHeadlines(String query) {
+		URI url = UriComponentsBuilder.fromHttpUrl(newsApiEndpoint + "/top-headlines")
+				.queryParam("apiKey", newsApiKey)
+				.queryParam("q", query).build().encode().toUri();
+		
+		return restTemplate.getForObject(url, TopHeadlineDto.class);
+	}
+	
 	public TopHeadlineDto getTopHeadlinesFromApi(String country, String category) {
 		URI url = UriComponentsBuilder.fromHttpUrl(newsApiEndpoint + "/top-headlines")
 				.queryParam("apiKey", newsApiKey)

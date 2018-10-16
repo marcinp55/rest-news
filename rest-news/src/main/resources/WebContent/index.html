@@ -8,7 +8,12 @@
 		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 	</head>
 	<body>
-		<h1 id="initial_header">Choose country and category to display news.</h1>
+		<h1 id="initial_header">Search a keyword or choose country and category to display news.</h1>
+		<form id="search_form">
+			<input id="search_query" type="text" placeholder="Search ONE keyword.. e.g. bitcoin">
+			<button type="submit">Search</button>
+		</form>
+		<hr>
 		<div data-articles-filter>
 			<label for="country_select">Country</label>
 			<select id="country_select">

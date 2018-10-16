@@ -14,4 +14,8 @@ public class HeadlineAndSourceDto {
 	private String country;
 	private String category;
 	private TopHeadlineDto topHeadlineDto;
+	
+	public HeadlineAndSourceDto(TopHeadlineDto topHeadlineDto) {
+		this.topHeadlineDto = topHeadlineDto;
+	}
 }

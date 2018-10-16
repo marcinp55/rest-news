@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.news.client.NewsClient;
@@ -16,6 +17,11 @@ import com.rest.news.domain.HeadlineAndSourceDto;
 public class NewsController {
 	@Autowired
 	NewsClient newsClient;
+	
+	@RequestMapping(method = RequestMethod.GET, value = "search")
+	public HeadlineAndSourceDto getTopHeadlinesByQuery(@RequestParam("query") String query) {
+		return new HeadlineAndSourceDto(newsClient.querySearchTopHeadlines(query));
+	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "{country}/{category}")
 	public HeadlineAndSourceDto getTopHeadlines(@PathVariable("country") String country, @PathVariable("category") String category) {
